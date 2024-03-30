@@ -1,5 +1,6 @@
 package menu.impl;
 
+import configs.ApplicationContext;
 import menu.Menu;
 
 public class SignOutMenu implements Menu {

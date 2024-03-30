@@ -3,6 +3,8 @@ package menu.impl;
 import configs.ApplicationContext;
 import menu.Menu;
 
+import java.util.Scanner;
+
 public class MainMenu implements Menu {
     public static final String MENU_COMMAND = "menu";
 
@@ -26,12 +28,55 @@ public class MainMenu implements Menu {
 
     @Override
     public void start() {
-        // <write your code here>
+        boolean isValidInput = true;
+        Scanner scanner = new Scanner(System.in);
+        String userInput;
+
+        while (isValidInput){
+            printMenuHeader();
+            System.out.print("User Input: ");
+            userInput = scanner.next();
+
+            switch (userInput){
+                case "1":
+                    System.out.println("Sign Up");
+                    isValidInput = false;
+                    break;
+                case "2":
+                    System.out.println("Sign In");
+                    isValidInput = false;
+                    break;
+                case "3":
+                    System.out.println("Product Catalog");
+                    isValidInput = false;
+                    break;
+                case "4":
+                    System.out.println("My Orders");
+                    isValidInput = false;
+                    break;
+                case "5":
+                    System.out.println("Settings");
+                    isValidInput = false;
+                    break;
+                case "6":
+                    System.out.println("Customer List");
+                    isValidInput = false;
+                    break;
+                case "exit":
+                    System.out.println("Exiting the app");
+                    isValidInput = false;
+                    break;
+                default:
+                    System.out.println("Only 1, 2, 3, 4, 5 is allowed. Try one more time");
+                    break;
+            }
+        }
 
     }
 
     @Override
     public void printMenuHeader() {
-        // <write your code here>
+        System.out.println("******** Main Menu ********");
+        System.out.println(MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER);
     }
 }

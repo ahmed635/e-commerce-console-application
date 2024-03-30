@@ -3,6 +3,8 @@ package entities.impl;
 import entities.Order;
 import entities.Product;
 
+import java.util.Arrays;
+
 public class DefaultOrder implements Order {
 
     private static final int AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER = 16;
@@ -13,23 +15,35 @@ public class DefaultOrder implements Order {
 
     @Override
     public boolean isCreditCardNumberValid(String creditCardNumber) {
-        // <write your code here>
-        return false;
+        return creditCardNumber.toCharArray().length == AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER &&
+                !creditCardNumber.contains(" ") && Long.parseLong(creditCardNumber) > 0;
     }
 
     @Override
     public void setCreditCardNumber(String creditCardNumber) {
-        // <write your code here>
+        if(isCreditCardNumberValid(creditCardNumber)){
+            this.creditCardNumber = creditCardNumber;
+        } else {
+            System.out.println("Credit number not void.");
+        }
     }
 
     @Override
     public void setProducts(Product[] products) {
-        // <write your code here>
+        if(products != null){
+            this.products = products;
+        } else {
+            System.out.println("Chose a void products.");
+        }
     }
 
     @Override
     public void setCustomerId(int customerId) {
-        // <write your code here>
+        if(customerId != 0){
+            this.customerId = customerId;
+        } else {
+            System.out.println("Wrong curstomer id.");
+        }
     }
 
 
@@ -40,7 +54,8 @@ public class DefaultOrder implements Order {
 
     @Override
     public String toString() {
-        // <write your code here>
-        return null;
+        return "Order: customer id - " + this.customerId + "\t" +
+                "credit card number - " + this.creditCardNumber + "\t" +
+                "products - " + Arrays.toString(this.products);
     }
 }

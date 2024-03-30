@@ -3,24 +3,34 @@ package entities.impl;
 import entities.User;
 
 public class DefaultUser implements User {
+    private static int id = 0;
+    private String firstName;
+    private String lastName;
+    private String password;
+    private String email;
+
 
     public DefaultUser() {
     }
 
     public DefaultUser(String firstName, String lastName, String password, String email) {
-        // <write your code here>
+        id++;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
     }
 
     @Override
     public String getFirstName() {
         // <write your code here>
-        return null;
+        return firstName;
     }
 
     @Override
     public String getLastName() {
         // <write your code here>
-        return null;
+        return lastName;
     }
 
     @Override
@@ -31,33 +41,33 @@ public class DefaultUser implements User {
 
     @Override
     public String getEmail() {
-        // <write your code here>
-        return null;
+        return email;
     }
 
     @Override
     public String toString() {
-        // <write your code here>
-        return null;
+        return "User[FullName: " + getFirstName() + " " + getLastName() + " Email: " + getEmail() + "]";
     }
 
     @Override
     public void setPassword(String password) {
-        // <write your code here>
+        if(password != null)
+            this.password = password;
     }
 
     @Override
     public void setEmail(String newEmail) {
-        // <write your code here>
+        if(newEmail != null){
+            this.email = newEmail;
+        }
     }
 
     @Override
     public int getId() {
-        // <write your code here>
-        return 0;
+        return id;
     }
 
     void clearState() {
-        // <write your code here>
+        id = 0;
     }
 }

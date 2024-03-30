@@ -1,6 +1,9 @@
 package menu.impl;
 
+import configs.ApplicationContext;
 import menu.Menu;
+import services.UserManagementService;
+import services.impl.DefaultUserManagementService;
 
 public class SignInMenu implements Menu {
     private ApplicationContext context;
