@@ -8,11 +8,11 @@ import java.util.Arrays;
 public class DefaultCart implements Cart {
     private static final int DEFAULT_PRODUCT_CAPACITY = 10;
     private Product[] products;
-    private int orderLength;
+    private int productLength;
 
-    public DefaultCart(){
+    {
         this.products = new Product[DEFAULT_PRODUCT_CAPACITY];
-        this.orderLength = 0;
+        this.productLength = 0;
     }
     @Override
     public boolean isEmpty() {
@@ -53,5 +53,6 @@ public class DefaultCart implements Cart {
     @Override
     public void clear() {
         products = new Product[DEFAULT_PRODUCT_CAPACITY];
+        productLength = 0;
     }
 }
