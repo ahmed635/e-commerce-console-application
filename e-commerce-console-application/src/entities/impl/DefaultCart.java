@@ -22,11 +22,11 @@ public class DefaultCart implements Cart {
     @Override
     public void addProduct(Product productById) {
         if (productById != null) {
-            if (products.length <= orderLength) {
+            if (products.length <= productLength) {
                 products = Arrays.copyOf(products, products.length << 1);
             }
-            products[orderLength] = productById;
-            orderLength++;
+            products[productLength] = productById;
+            productLength++;
         }
     }
 
