@@ -1,7 +1,6 @@
 package configs;
 
-import entities.Cart;
-import entities.User;
+import entities.*;
 import entities.impl.DefaultCart;
 import menu.Menu;
 
