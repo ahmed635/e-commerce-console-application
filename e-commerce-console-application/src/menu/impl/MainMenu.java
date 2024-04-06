@@ -2,7 +2,7 @@ package menu.impl;
 
 import configs.ApplicationContext;
 import menu.Menu;
-import Main;
+// import Main;
 import java.util.Scanner;
 
 public class MainMenu implements Menu {
@@ -40,7 +40,7 @@ public class MainMenu implements Menu {
                 Scanner sc = new Scanner(System.in);
                 System.out.print("User input: ");
                 String userInput = sc.next();
-                if (userInput.equalsIgnoreCase(Main.EXIT_COMMAND)) 
+                if (userInput.equalsIgnoreCase("exit"))
                     System.exit(0);
                 else {
                     int commandNumber = Integer.parseInt(userInput);
@@ -51,7 +51,7 @@ public class MainMenu implements Menu {
                         case 2:
                             if (context.getLoggedInUser() == null)
                                 menuToNavigate = new SignInMenu();
-                            else 
+                            else
                                 menuToNavigate = new SignOutMenu();
                             break mainLoop;
                         case 3:
@@ -80,7 +80,7 @@ public class MainMenu implements Menu {
     @Override
     public void printMenuHeader() {
         System.out.println("******** Main Menu ********");
-        if(context.getLoggedInUser() == null){
+        if (context.getLoggedInUser() == null) {
             System.out.println(MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER);
         } else {
             System.out.println(MAIN_MENU_TEXT_FOR_LOGGED_IN_USER);

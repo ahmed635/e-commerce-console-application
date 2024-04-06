@@ -20,7 +20,8 @@ public class DefaultProduct implements Product {
 
     @Override
     public String toString() {
-        return "Product[id: " + id + " Product Name: " + productName + " Category: " + categoryName + " Price: " + price + "]";
+        return "Product[id: " + id + " Product Name: " + productName + " Category: " + categoryName + " Price: " + price
+                + "]";
     }
 
     @Override
@@ -31,5 +32,14 @@ public class DefaultProduct implements Product {
     @Override
     public String getProductName() {
         return this.productName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public double getPrice()
+    {
+        return price;
     }
 }

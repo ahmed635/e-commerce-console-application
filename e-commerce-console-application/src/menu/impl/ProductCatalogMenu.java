@@ -4,6 +4,7 @@ import configs.ApplicationContext;
 import menu.Menu;
 import services.ProductManagementService;
 import services.impl.DefaultProductManagementService;
+import entities.*;
 
 public class ProductCatalogMenu implements Menu {
     private static final String CHECKOUT_COMMAND = "checkout";
@@ -17,11 +18,16 @@ public class ProductCatalogMenu implements Menu {
 
     @Override
     public void start() {
-        // <write your code here>
+        printMenuHeader();
+        Product[] products = productManagementService.getProducts();
+        for(Product product: products) {
+            System.out.println(product);
+        }
     }
 
     @Override
     public void printMenuHeader() {
-        // <write your code here>
+        System.out.println("*** PRODUCT CATALOG ***");
     }
+
 }
