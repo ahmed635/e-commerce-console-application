@@ -45,13 +45,13 @@ public class DefaultUserManagementService implements UserManagementService {
         if(email == null || email.isEmpty())
             return EMPTY_EMAIL_ERROR_MESSAGE;
         for(User user: users){
-            if(!isValidEmail(user, email))
+            if(isNotUniqueEmail(user, email))
                 return NOT_UNIQUE_EMAIL_ERROR_MESSAGE;
         }
         return NO_ERROR_MESSAGE;
     }
 
-    private boolean isValidEmail(User user, String email) {
+    private boolean isNotUniqueEmail(User user, String email) {
         return (user != null) && (user.getEmail() != null) && (user.getEmail().equalsIgnoreCase(email));
     }
 

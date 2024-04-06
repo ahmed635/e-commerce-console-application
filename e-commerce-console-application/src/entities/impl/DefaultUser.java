@@ -9,7 +9,6 @@ public class DefaultUser implements User {
     private String password;
     private String email;
 
-
     public DefaultUser() {
     }
 
@@ -51,13 +50,13 @@ public class DefaultUser implements User {
 
     @Override
     public void setPassword(String password) {
-        if(password != null)
+        if (password != null)
             this.password = password;
     }
 
     @Override
     public void setEmail(String newEmail) {
-        if(newEmail != null){
+        if (newEmail != null) {
             this.email = newEmail;
         }
     }
@@ -65,6 +64,14 @@ public class DefaultUser implements User {
     @Override
     public int getId() {
         return id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLasttName(String lastName) {
+        this.lastName = lastName;
     }
 
     void clearState() {

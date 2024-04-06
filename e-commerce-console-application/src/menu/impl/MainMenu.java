@@ -2,19 +2,21 @@ package menu.impl;
 
 import configs.ApplicationContext;
 import menu.Menu;
-
+import Main;
 import java.util.Scanner;
 
 public class MainMenu implements Menu {
     public static final String MENU_COMMAND = "menu";
 
-    private static final String MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER = "Please, enter number in console to proceed." + System.lineSeparator()
+    private static final String MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER = "Please, enter number in console to proceed."
+            + System.lineSeparator()
             + "1. Sign Up" + System.lineSeparator() + "2. Sign In"
             + System.lineSeparator() + "3. Product Catalog" + System.lineSeparator()
             + "4. My Orders" + System.lineSeparator() + "5. Settings" + System.lineSeparator() +
             "6. Customer List";
 
-    private static final String MAIN_MENU_TEXT_FOR_LOGGED_IN_USER = "Please, enter number in console to proceed." + System.lineSeparator()
+    private static final String MAIN_MENU_TEXT_FOR_LOGGED_IN_USER = "Please, enter number in console to proceed."
+            + System.lineSeparator()
             + "1. Sign Up" + System.lineSeparator() + "2. Sign Out"
             + System.lineSeparator() + "3. Product Catalog" + System.lineSeparator()
             + "4. My Orders" + System.lineSeparator() + "5. Settings" + System.lineSeparator() +
@@ -28,55 +30,60 @@ public class MainMenu implements Menu {
 
     @Override
     public void start() {
-        boolean isValidInput = true;
-        Scanner scanner = new Scanner(System.in);
-        String userInput;
+        while (true) {
+            if (context.getMainMenu() == null)
+                context.setMainMenu(this);
+            Menu menuToNavigate = null;
 
-        while (isValidInput){
-            printMenuHeader();
-            System.out.print("User Input: ");
-            userInput = scanner.next();
-
-            switch (userInput){
-                case "1":
-                    System.out.println("Sign Up");
-                    isValidInput = false;
-                    break;
-                case "2":
-                    System.out.println("Sign In");
-                    isValidInput = false;
-                    break;
-                case "3":
-                    System.out.println("Product Catalog");
-                    isValidInput = false;
-                    break;
-                case "4":
-                    System.out.println("My Orders");
-                    isValidInput = false;
-                    break;
-                case "5":
-                    System.out.println("Settings");
-                    isValidInput = false;
-                    break;
-                case "6":
-                    System.out.println("Customer List");
-                    isValidInput = false;
-                    break;
-                case "exit":
-                    System.out.println("Exiting the app");
-                    isValidInput = false;
-                    break;
-                default:
-                    System.out.println("Only 1, 2, 3, 4, 5 is allowed. Try one more time");
-                    break;
+            mainLoop: while (true) {
+                printMenuHeader();
+                Scanner sc = new Scanner(System.in);
+                System.out.print("User input: ");
+                String userInput = sc.next();
+                if (userInput.equalsIgnoreCase(Main.EXIT_COMMAND)) 
+                    System.exit(0);
+                else {
+                    int commandNumber = Integer.parseInt(userInput);
+                    switch (commandNumber) {
+                        case 1:
+                            menuToNavigate = new SignUpMenu();
+                            break mainLoop;
+                        case 2:
+                            if (context.getLoggedInUser() == null)
+                                menuToNavigate = new SignInMenu();
+                            else 
+                                menuToNavigate = new SignOutMenu();
+                            break mainLoop;
+                        case 3:
+                            menuToNavigate = new ProductCatalogMenu();
+                            break mainLoop;
+                        case 4:
+                            menuToNavigate = new MyOrdersMenu();
+                            break mainLoop;
+                        case 5:
+                            menuToNavigate = new SettingsMenu();
+                            break mainLoop;
+                        case 6:
+                            menuToNavigate = new CustomerListMenu();
+                            break mainLoop;
+                        default:
+                            System.out.println("Only 1, 2, 3, 4, 5 is allowed. Try one more time");
+                            continue; // continue endless loop
+                    }
+                }
             }
-        }
 
+            menuToNavigate.start();
+        }
     }
 
     @Override
     public void printMenuHeader() {
         System.out.println("******** Main Menu ********");
-        System.out.println(MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER);
+        if(context.getLoggedInUser() == null){
+            System.out.println(MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER);
+        } else {
+            System.out.println(MAIN_MENU_TEXT_FOR_LOGGED_IN_USER);
+        }
     }
 }
