@@ -19,14 +19,20 @@ public class SignInMenu implements Menu {
     @Override
     public void start() {
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("Enter your eamil:");
         String email = scanner.nextLine();
+
         System.out.println("Enter your password: ");
         String password = scanner.nextLine();
+
         User user = userManagementService.getUserByEmail(email);
-        if (user != null && user.getPassword().equals(password))
-            System.out.println("Glad to see you back " + user.getFirstName() + " " + user.getLastName());
-        else 
+        System.out.println(user);
+        if (user != null && user.getPassword().equalsIgnoreCase(password)){
+            System.out.printf("Glad to see you back %s %s", user.getFirstName(),
+                user.getLastName() + System.lineSeparator());
+            context.setLoggedInUser(user);
+        } else 
             System.out.println("Unfortunately, such login and password doesn't exist");
     }
 

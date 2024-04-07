@@ -22,20 +22,17 @@ public class DefaultUser implements User {
 
     @Override
     public String getFirstName() {
-        // <write your code here>
         return firstName;
     }
 
     @Override
     public String getLastName() {
-        // <write your code here>
         return lastName;
     }
 
     @Override
     public String getPassword() {
-        // <write your code here>
-        return null;
+        return password;
     }
 
     @Override

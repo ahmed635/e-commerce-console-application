@@ -39,11 +39,7 @@ public class DefaultOrder implements Order {
 
     @Override
     public void setCustomerId(int customerId) {
-        if(customerId != 0){
-            this.customerId = customerId;
-        } else {
-            System.out.println("Wrong curstomer id.");
-        }
+        this.customerId = customerId;
     }
 
 
