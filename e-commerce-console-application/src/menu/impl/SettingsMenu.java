@@ -51,7 +51,6 @@ public class SettingsMenu implements Menu {
             }
         }
         menuToNavigate.start();
-
     }
 
     @Override
