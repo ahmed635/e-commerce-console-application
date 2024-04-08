@@ -3,18 +3,18 @@ package services.impl;
 import entities.Order;
 import services.OrderManagementService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class DefaultOrderManagementService implements OrderManagementService {
-    private static final int DEFAULT_ORDER_CAPACITY = 10;
-
     private static DefaultOrderManagementService instance;
 
-    private Order[] orders;
-    private int lastIndex;
+    private List<Order> orders;
+ ;
 
     {
-        orders = new Order[DEFAULT_ORDER_CAPACITY];
+        orders = new ArrayList<>();
     }
 
     public static OrderManagementService getInstance() {
@@ -27,49 +27,26 @@ public class DefaultOrderManagementService implements OrderManagementService {
     @Override
     public void addOrder(Order order) {
         if (order != null) {
-            if (orders.length <= lastIndex) {
-                orders = Arrays.copyOf(orders, orders.length << 1);
-            }
-            orders[lastIndex] = order;
-            lastIndex++;
+            this.orders.add(order);
         }
     }
 
     @Override
-    public Order[] getOrdersByUserId(int userId) {
-        int amountOfUserOrder = 0;
+    public List<Order> getOrdersByUserId(int userId) {
+        List<Order> userOrder = new ArrayList<>();
         for (Order order : orders) {
             if ((order != null) && (order.getCustomerId() == userId))
-                amountOfUserOrder++;
-        }
-        Order[] userOrder = new Order[amountOfUserOrder];
-        int index = 0;
-        for (Order order : orders) {
-            if ((order != null) && (order.getCustomerId() == userId))
-                userOrder[index++] = order;
+                userOrder.add(order);
         }
         return userOrder;
     }
 
     @Override
-    public Order[] getOrders() {
-        int nonNullOrdersAmount = 0;
-        for (Order order : orders) {
-            if (order != null)
-                nonNullOrdersAmount++;
-        }
-
-        Order[] nonNullOrders = new Order[nonNullOrdersAmount];
-        int index = 0;
-        for (Order order : orders) {
-            if (order != null)
-                nonNullOrders[index++] = order;
-        }
-        return nonNullOrders;
+    public List<Order> getOrders() {
+        return this.orders;
     }
 
     void clearServiceState() {
-        lastIndex = 0;
-        orders = new Order[DEFAULT_ORDER_CAPACITY];
+        orders = new ArrayList<>();
     }
 }

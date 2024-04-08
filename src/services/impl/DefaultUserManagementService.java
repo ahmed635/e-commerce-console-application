@@ -2,7 +2,8 @@ package services.impl;
 
 import entities.User;
 import services.UserManagementService;
-
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DefaultUserManagementService implements UserManagementService {
@@ -10,17 +11,14 @@ public class DefaultUserManagementService implements UserManagementService {
     private static final String EMPTY_EMAIL_ERROR_MESSAGE = "You have to input email to register. Please, try one more time";
     private static final String NO_ERROR_MESSAGE = "";
 
-    private static final int DEFAULT_USERS_CAPACITY = 10;
-    private User[] users;
-    private int userLastIndex;
+    private List<User> users;
 
     private static DefaultUserManagementService instance;
 
     // <write your code here>
 
     private DefaultUserManagementService() {
-        users = new User[DEFAULT_USERS_CAPACITY];
-        userLastIndex = 0;
+        users = new ArrayList<>();
     }
 
     @Override
@@ -33,11 +31,7 @@ public class DefaultUserManagementService implements UserManagementService {
         if (user.getEmail() != null && !errorMessage.isEmpty()) {
             return errorMessage;
         }
-        if (users.length <= userLastIndex) {
-            users = Arrays.copyOf(users, users.length << 1);
-        }
-
-        users[userLastIndex++] = user;
+        users.add(user);
         return NO_ERROR_MESSAGE;
     }
 
@@ -64,20 +58,8 @@ public class DefaultUserManagementService implements UserManagementService {
 
 
     @Override
-    public User[] getUsers() {
-        int nonNullUserAmount = 0;
-        for (User user : users) {
-            if (user != null)
-                nonNullUserAmount++;
-        }
-
-        User[] nonNullUsers = new User[nonNullUserAmount];
-        int index = 0;
-        for (User user : users) {
-            if (user != null)
-                nonNullUsers[index++] = user;
-        }
-        return nonNullUsers;
+    public List<User> getUsers() {
+        return this.users;
     }
 
     @Override
@@ -90,7 +72,6 @@ public class DefaultUserManagementService implements UserManagementService {
     }
 
     void clearServiceState() {
-        users = new User[DEFAULT_USERS_CAPACITY];
-        userLastIndex = 0;
+        users = new ArrayList<>();
     }
 }

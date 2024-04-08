@@ -5,7 +5,8 @@ import menu.Menu;
 import services.ProductManagementService;
 import services.impl.DefaultProductManagementService;
 import entities.*;
-import java.util.Scanner;
+import java.util.*;
+
 
 public class ProductCatalogMenu implements Menu {
     private static final String CHECKOUT_COMMAND = "checkout";
@@ -68,7 +69,7 @@ public class ProductCatalogMenu implements Menu {
 	}
 
 	private void printProductsToConsole() {
-		Product[] products = productManagementService.getProducts();
+		List<Product> products = productManagementService.getProducts();
 		for (Product product : products) {
 			System.out.println(product);
 		}

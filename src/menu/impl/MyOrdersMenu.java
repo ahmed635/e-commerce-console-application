@@ -4,7 +4,7 @@ import configs.ApplicationContext;
 import menu.Menu;
 import services.OrderManagementService;
 import services.impl.DefaultOrderManagementService;
-import java.util.Scanner;
+import java.util.*;
 import entities.*;
 
 public class MyOrdersMenu implements Menu {
@@ -28,10 +28,10 @@ public class MyOrdersMenu implements Menu {
     }
 
     private void printUserOrdersToConsole(){
-        Order[] loggedInUserOrders = orderManagementService
+        List<Order> loggedInUserOrders = orderManagementService
 				.getOrdersByUserId(context.getLoggedInUser().getId());
 
-		if (loggedInUserOrders == null || loggedInUserOrders.length == 0) {
+		if (loggedInUserOrders == null || loggedInUserOrders.size() == 0) {
 			System.out.println(
 					"Unfortunately, you don't have any orders yet. "
 					+ "Navigate back to main menu to place a new order");

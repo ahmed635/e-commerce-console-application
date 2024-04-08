@@ -2,57 +2,34 @@ package entities.impl;
 
 import entities.Cart;
 import entities.Product;
-
-import java.util.Arrays;
+import java.util.*;
 
 public class DefaultCart implements Cart {
-    private static final int DEFAULT_PRODUCT_CAPACITY = 10;
-    private Product[] products;
-    private int productLength;
+    private List<Product> products;
 
     {
-        this.products = new Product[DEFAULT_PRODUCT_CAPACITY];
-        this.productLength = 0;
+        this.products = new ArrayList<>();
     }
+
     @Override
     public boolean isEmpty() {
-        return products.length == 0;
+        return products.size() == 0;
     }
 
     @Override
     public void addProduct(Product productById) {
         if (productById != null) {
-            if (products.length <= productLength) {
-                products = Arrays.copyOf(products, products.length << 1);
-            }
-            products[productLength] = productById;
-            productLength++;
+            products.add(productById);
         }
     }
 
     @Override
-    public Product[] getProducts() {
-        int nonNullProductsAmount = 0;
-        for (Product product : products) {
-            if (product != null) {
-                nonNullProductsAmount++;
-            }
-        }
-
-        Product[] nonNullProducts = new Product[nonNullProductsAmount];
-        int index = 0;
-        for (Product product : products) {
-            if (product != null) {
-                nonNullProducts[index++] = product;
-            }
-        }
-
-        return nonNullProducts;
+    public List<Product> getProducts() {
+        return this.products;
     }
 
     @Override
     public void clear() {
-        products = new Product[DEFAULT_PRODUCT_CAPACITY];
-        productLength = 0;
+        products = new ArrayList<>();
     }
 }
