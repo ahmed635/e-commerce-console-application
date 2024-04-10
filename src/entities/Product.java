@@ -5,4 +5,10 @@ public interface Product {
 
     String getProductName();
 
+    String getCategoryName();
+    
+    double getPrice();
+
+    void setPrice(double price);
+
 }
